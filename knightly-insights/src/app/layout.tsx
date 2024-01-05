@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import PocketBase from 'pocketbase';
+
+const url = 'https://knightly-insights.pockethost.io/'
+const client = new PocketBase(url)
 
 const inter = Inter({ subsets: ['latin'] })
 
