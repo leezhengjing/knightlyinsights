@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import PocketBase from 'pocketbase';
+import SideBar from './sidebar';
 
 const url = 'https://knightly-insights.pockethost.io/'
 const client = new PocketBase(url)
@@ -20,7 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <body className={`${inter.className} bg-slate-300`}>
+        <div className='flex'>
+          <SideBar />
+          <div className='pl-12 ml-6'>{children}</div>
+        </div>
+      </body>
+    </html >
   )
 }

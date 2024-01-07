@@ -1,12 +1,28 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  media: "dark",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // gray: colors.slate,
+        gray: {
+          900: '#202225',
+          800: '#2f3136',
+          700: '#36393f',
+          600: '#4f545c',
+          500: '#62666e',
+          400: '#d4d7dc',
+          300: '#e3e5e8',
+          200: '#ebedef',
+          100: '#f2f3f5',
+        }
+      }
+    },
   },
   plugins: [],
 }
