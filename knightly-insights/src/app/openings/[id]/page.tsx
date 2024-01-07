@@ -6,7 +6,7 @@ import ChessBoard from "@/app/utils/chessboard";
 import { RecordModel } from 'pocketbase';
 
 async function getOpening(openingId: string) {
-    const opening = await pb.collection('openings').getOne(openingId, { expand: 'image, pgn' })
+    const opening = await pb.collection('openings').getOne(openingId, { expand: 'image, pgn', requestKey: null })
     return opening;
 }
 export default function OpeningPage({ params }: any) {
