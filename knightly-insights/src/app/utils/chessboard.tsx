@@ -1,3 +1,4 @@
+// @ts-ignore
 import ChessAnalysisBoard from "react-chess-analysis-board";
 
 export default function ChessBoard(props: { pgnString: string }) {
