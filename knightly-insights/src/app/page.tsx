@@ -4,6 +4,7 @@ import Logout from './components/logout'
 import { cookies } from 'next/headers'
 import db from '@/db'
 import { use } from 'react'
+import Chessground from '@react-chess/chessground'
 
 const getUser = async () => {
   const cookieStore = cookies();

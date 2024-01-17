@@ -6,7 +6,7 @@ import Link from 'next/link';
 const SideBar = () => {
     return (
         <div className="fixed top-0 left-0 h-screen w-16 flex flex-col bg-gray-900 text-white shadow">
-            <Link href="/openings"><SideBarIcon icon={<GiMountedKnight size="40" />} /></Link>
+            <Link href="/dashboard"><SideBarIcon icon={<GiMountedKnight size="40" />} /></Link>
             <Divider />
             <SideBarIcon icon={<BsPlus size="28" />} />
             <SideBarIcon icon={<BsFillLightningFill size="28" />} />

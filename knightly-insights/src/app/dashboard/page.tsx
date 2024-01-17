@@ -11,7 +11,7 @@ async function getOpenings() {
 
 }
 
-export default async function OpeningsPage() {
+export default async function DashboardPage() {
     const openings = await getOpenings();
     return (
         <div>
@@ -29,7 +29,7 @@ function Opening({ opening }: { opening: any }) {
     const { id, title, content, image, created } = opening || {};
     const url = db.client.files.getUrl(opening, image, { size: '400x400    ' })
     return (
-        <Link href={`/openings/${id}`} key={id}>
+        <Link href={`/dashboard/courses/${id}`} key={id}>
             <div className={`px-2 pb-2   mt-2 border border-solid transition-all duration-200 bg-white `}>
                 <h2 className='text-blue-900 text-xl w-1/2 my-2 font-semibold'>{title}</h2>
                 <div className='p-0 m-0 w-fit'>

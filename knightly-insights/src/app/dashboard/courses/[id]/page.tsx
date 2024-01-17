@@ -1,9 +1,8 @@
 "use client"
 import { useEffect, useState } from 'react';
 import db from '@/db';
-import Image from "next/image";
-import ChessBoard from "@/app/utils/chessboard";
 import { RecordModel } from 'pocketbase';
+import ChessAnalysisBoard from '@/app/components/chessboard/ChessAnalysisBoard';
 
 async function getOpening(openingId: string) {
     const opening = await db.client.collection('openings').getOne(openingId, { expand: 'image, pgn', requestKey: null })
@@ -35,7 +34,7 @@ export default function OpeningPage({ params }: any) {
             <h1>{opening.title}</h1>
             <div>
                 {/* <Image src={url} alt={opening.title} width={300} height={300} /> */}
-                {typeof window !== 'undefined' && <ChessBoard pgnString={opening.pgn} />}
+                {typeof window !== 'undefined' && <ChessAnalysisBoard pgnString={opening.pgn} />}
                 <h5>{opening.content}</h5>
             </div>
         </div>
