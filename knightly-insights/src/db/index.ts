@@ -8,6 +8,7 @@ export class DatabaseClient {
 
     constructor() {
         this.client = new PocketBase(POCKET_BASE_URL);
+        this.client.autoCancellation(false);
     }
 
     async authenticate(email: string, password: string) {
