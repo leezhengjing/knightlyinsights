@@ -1,12 +1,12 @@
 "use client"
 import { useEffect, useState } from 'react';
-import { pb } from "@/app/utils/pocketbase";
+import db from '@/db';
 import Image from "next/image";
 import ChessBoard from "@/app/utils/chessboard";
 import { RecordModel } from 'pocketbase';
 
 async function getOpening(openingId: string) {
-    const opening = await pb.collection('openings').getOne(openingId, { expand: 'image, pgn', requestKey: null })
+    const opening = await db.client.collection('openings').getOne(openingId, { expand: 'image, pgn', requestKey: null })
     return opening;
 }
 export default function OpeningPage({ params }: any) {
@@ -20,12 +20,11 @@ export default function OpeningPage({ params }: any) {
 
             // Assuming you want to load the ChessBoard after fetching the opening data
             // If ChessBoard has any async initialization, make sure to handle it appropriately
-            setUrl(pb.files.getUrl(openingData, openingData.image, { size: '300x300' }));
+            setUrl(db.client.files.getUrl(openingData, openingData.image, { size: '300x300' }));
         }
 
         fetchOpening();
     }, [params.id]);
-    console.log(opening);
     // Render loading state while opening data is being fetched
     if (!opening) {
         return <div>Loading...</div>;

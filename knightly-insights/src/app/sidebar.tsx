@@ -1,11 +1,12 @@
 import { BsPlus, BsFillLightningFill, BsGearFill } from 'react-icons/bs';
 import { FaFire, FaPoo } from 'react-icons/fa';
 import { GiMountedKnight } from 'react-icons/gi';
+import Link from 'next/link';
 
 const SideBar = () => {
     return (
         <div className="fixed top-0 left-0 h-screen w-16 flex flex-col bg-gray-900 text-white shadow">
-            <SideBarIcon icon={<GiMountedKnight size="40" />} />
+            <Link href="/openings"><SideBarIcon icon={<GiMountedKnight size="40" />} /></Link>
             <Divider />
             <SideBarIcon icon={<BsPlus size="28" />} />
             <SideBarIcon icon={<BsFillLightningFill size="28" />} />

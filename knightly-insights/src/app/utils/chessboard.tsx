@@ -12,7 +12,7 @@ export default function ChessBoard(props: { pgnString: string }) {
                     },
                     boardConfig: {
                         ChessBoardProps: {
-                            showBoardNotation: true,
+                            showBoardNotation: false,
                             boardOrientation: 'black',
                         }
                     }

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { pb } from '@/app/utils/pocketbase';
+import db from '@/db';
 import styles from '../page.module.css'
 
 async function getOpenings() {
-    const openings = await pb.collection('openings').getFullList({
+    const openings = await db.client.collection('openings').getFullList({
         sort: '-created',
     });
     return openings;
@@ -27,7 +27,7 @@ export default async function OpeningsPage() {
 
 function Opening({ opening }: { opening: any }) {
     const { id, title, content, image, created } = opening || {};
-    const url = pb.files.getUrl(opening, image, { size: '400x400    ' })
+    const url = db.client.files.getUrl(opening, image, { size: '400x400    ' })
     return (
         <Link href={`/openings/${id}`} key={id}>
             <div className={`px-2 pb-2   mt-2 border border-solid transition-all duration-200 bg-white `}>
