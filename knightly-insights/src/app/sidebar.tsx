@@ -5,14 +5,14 @@ import Link from 'next/link';
 
 const SideBar = () => {
     return (
-        <div className="fixed top-0 left-0 h-screen w-16 flex flex-col bg-gray-900 text-white shadow">
+        <div className="fixed top-0 left-0 h-screen w-16 p-0 m-0 flex flex-col bg-gray-900 text-white shadow">
             <Link href="/dashboard"><SideBarIcon icon={<GiMountedKnight size="40" />} /></Link>
             <Divider />
             <SideBarIcon icon={<BsPlus size="28" />} />
             <SideBarIcon icon={<BsFillLightningFill size="28" />} />
             <SideBarIcon icon={<FaPoo size="28" />} />
             <Divider />
-            <SideBarIcon icon={<BsGearFill size="28" />} />
+            <Link href="/"><SideBarIcon icon={<BsGearFill size="28" />} /></Link>
         </div>
     )
 };

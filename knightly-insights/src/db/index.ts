@@ -25,6 +25,34 @@ export class DatabaseClient {
         }
     }
 
+    async authenticateAdmin(email: string, password: string) {
+        try {
+            const result = await this.client.admins.authWithPassword(email, password);
+            console.log('Authenticate admin result:', result);
+            if (!result?.token) {
+                throw new Error("Invalid email or password");
+            }
+            return result;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Invalid admin email or password");
+        }
+    }
+
+    async authenticateOAuth2(provider: string) {
+        try {
+            const result = await this.client.collection('users').authWithOAuth2({ provider: provider });
+            console.log('Authenticate with OAuth2 result:', result);
+            if (!result?.token) {
+                throw new Error("Invalid OAuth2");
+            }
+            return result;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Invalid Oauth2");
+        }
+    }
+
     async register(email: string, password: string) {
         try {
             const result = await this.client.collection("users").create({

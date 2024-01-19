@@ -1,6 +1,7 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { Chess, Move } from 'chess.js'
 
+// Interface for representing chess nodes
 interface TChessNodes {
     edgeNodeIndex: number,
     node: Chess,
@@ -9,11 +10,13 @@ interface TChessNodes {
     historyArray?: string | Move[]
 }
 
+// Interface for representing board positions
 interface TBoardPosition {
     nodeId: number,
     moveIndex: number
 }
 
+// Interface for the overall position tree state 
 interface TPositionTree {
     boardPosition: TBoardPosition,
     setBoardPosition: Function,
@@ -28,6 +31,7 @@ interface TPositionTree {
     setPosition: Function
 }
 
+// Interface for setting the position tree state
 export interface TPositionTreeSetter {
     pgnString: string,
     boardPosition: TBoardPosition,
@@ -35,6 +39,7 @@ export interface TPositionTreeSetter {
     chessNodes: TChessNodes[],
 }
 
+// Create a React context for the chess game state
 const PositionContext = createContext<TPositionTree>({
     boardPosition: {
         nodeId: 0,
@@ -48,8 +53,9 @@ const PositionContext = createContext<TPositionTree>({
     setPosition: () => { }
 });
 
+// Creating a context provider component
 export const PositionContextProvider = (props: any) => {
-
+    // State variables for managing the chess game state
     const [boardPosition, setBoardPosition] = useState<TBoardPosition>({
         nodeId: 0,
         moveIndex: 0
@@ -63,8 +69,9 @@ export const PositionContextProvider = (props: any) => {
     }])
 
     const [fen, setFen] = useState<string>('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+    // useEffect to update when boardPosition changes
     useEffect(() => {
-        const currentNode = chessNodes.filter((el) => el.nodeId === boardPosition.nodeId)[0]
+        const currentNode = chessNodes.filter((el) => el.nodeId == boardPosition.nodeId)[0]
         const currentNodeHistory = currentNode.node.history()
         const tempChessRender = new Chess()
         currentNodeHistory.map((el, i) => {
@@ -78,17 +85,19 @@ export const PositionContextProvider = (props: any) => {
     }, [boardPosition])
 
     const handleRightClick = () => {
-        const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
-        const boardHistory = currentNode.node.history()
-        if (boardPosition?.moveIndex < boardHistory.length) {
-            const newMoveIndex = boardPosition.moveIndex + 1
-            setBoardPosition({
-                ...boardPosition,
-                moveIndex: newMoveIndex
-            })
-            currentNode.node.move(boardHistory[newMoveIndex])
+        const currentNode = chessNodes.find(el => el.nodeId === boardPosition.nodeId);
+        if (currentNode) {
+            const boardHistory = currentNode.node.history();
+            if (boardPosition?.moveIndex < boardHistory.length) {
+                const newMoveIndex = boardPosition.moveIndex + 1;
+                setBoardPosition(prevBoardPosition => ({
+                    ...prevBoardPosition,
+                    moveIndex: newMoveIndex
+                }));
+                currentNode.node.move(boardHistory[newMoveIndex]);
+            }
         }
-    }
+    };
 
     const handleLeftClick = () => {
         if (boardPosition.nodeId === 0 && boardPosition.moveIndex === 0) {

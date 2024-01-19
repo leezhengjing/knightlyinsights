@@ -16,10 +16,14 @@ const getUser = async () => {
 
 export default function Home() {
   const user = use(getUser())
+  const isAdmin = !user?.username
   return (
     <main className={styles.main}>
       <h1>Home</h1>
-      <p>Hi, {user?.username}</p>
+      {isAdmin
+        ? <p>Welcome, admin</p>
+        : <p>Welcome {user.username}</p>
+      }
       <Logout />
     </main>
   )

@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { usePositionContext } from '@/app/contexts/PositionContext'
 
 
@@ -28,11 +27,11 @@ const Panel = (props: TProps) => {
     return (
         <div className={panelContainerClassName}>
             <div className='RCAB-panel-item' onClick={() => handleLeftClick()}>
-                <FontAwesomeIcon icon={faArrowLeftLong} />
+                <FaArrowLeftLong size='28' />
             </div>
             <div></div>
             <div className='RCAB-panel-item' onClick={() => handleRightClick()}>
-                <FontAwesomeIcon icon={faArrowRightLong} />
+                <FaArrowRightLong size='28' />
             </div>
         </div>
     )
