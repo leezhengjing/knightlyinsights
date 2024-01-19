@@ -4,20 +4,29 @@ import { Chess } from 'chess.js'
 import { usePositionContext } from "@/app/contexts/PositionContext";
 import { useEffect, useRef, useState } from "react";
 
+// Create a interface TBoardConfig to be used in the Board Component
 export interface TBoardConfig {
     fen?: string
     ChessBoardProps?: TChessBoardProps
 }
 
+// Create a interface TProps to be used in the Board Component as props
 interface TProps {
     boardConfig?: TBoardConfig
 }
 
+// To resolve the new issue of react-chessboard requiring to include ClearPremoves in the ChessboardProps
 interface ClearPremoves {
     clearPremoves: (clearLastPieceColour?: boolean) => void;
 }
 
+/**
+ * Board Component
+ * @param props 
+ * @returns 
+ */
 const Board = (props: TProps) => {
+
     const { boardPosition, setBoardPosition,
         chessRootNode, chessNodes, setChessNodes,
         handleRightClick,
@@ -68,6 +77,7 @@ const Board = (props: TProps) => {
             ...chessBoardProps,
             getPositionObject: (currentPosition) => handleGetcurrentPosition(currentPosition),
             onPieceDrop: (sourceSquare, targetSquare, piece) => handleOnPieceDrop(sourceSquare, targetSquare, piece),
+            arePiecesDraggable: false,
             position: fen,
         })
     }, [fen])
